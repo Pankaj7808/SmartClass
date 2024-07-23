@@ -1,40 +1,73 @@
+import {
+  AppBar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Container,
+  IconButton,
+  Paper,
+  TextField,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import React from "react";
 
 function Login() {
   return (
-    <div>
-      <h1>SmartClass</h1>
-      <hr></hr>
-      <div className="container">
-        <div className="login-container">
-      <h1 className="smart">Login</h1>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "calc(100vh - 88px)",
+      }}
+    >
+      <Paper elevation={2} sx={{ padding: 4 }}>
+        <Box minWidth="350px" display="flex" flexDirection="column" gap={3}>
+          <Typography variant="h5" component="h1" color="primary">
+            Login
+          </Typography>
+          <TextField
+            label="Email"
+            fullWidth
+            variant="outlined"
             required
+            autoFocus
+            // error={emailError}
+            // helperText={emailError ? "Email is required" : ""}
+            // value={email}
+            // onChange={(e) => setEmail(e.target.value)}
           />
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-          
+          <TextField
+            label="Password"
+            fullWidth
+            variant="outlined"
             required
+            // error={passwordError}
+            // helperText={passwordError ? "Password is required" : ""}
+            // value={password}
+            // onChange={(e) => setPassword(e.target.value)}
           />
-          <input type="submit" value="Login" />
-        </form>
-      </div>
-    </div>
-        
-      </div>
-    </div>
+          <Button variant="contained" size="large">
+            Login
+          </Button>
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+          >
+            <Typography variant="subtitle2" sx={{ cursor: "pointer" }}>
+              Don't have account?
+            </Typography>
+            <Typography variant="subtitle2" sx={{ cursor: "pointer" }}>
+              Forget Password?
+            </Typography>
+          </Box>
+        </Box>
+      </Paper>
+    </Box>
   );
 }
 

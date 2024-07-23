@@ -1,14 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import LoginPage from './pages/login/LoginPage';
+import { Box, Paper, Typography } from "@mui/material";
+import "./App.css";
+import Layout from "./pages/login/Layout";
+import LoginPage from "./pages/login/LoginPage";
 
 function App() {
   return (
     <div className="App">
-      <p>NSNS</p>
-      <h2>jd</h2>
-      <h1>hello</h1>
-      <LoginPage/>
+      <Layout>
+        <LoginPage/>
+      </Layout>
     </div>
   );
 }
