@@ -2,19 +2,37 @@ import {
   AppBar,
   Box,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  IconButton,
   Paper,
   TextField,
-  Toolbar,
   Typography,
 } from "@mui/material";
 import React from "react";
+import * as yup from "yup";
+import { useFormik } from "formik";
 
 function Login() {
+  const validationSchema = yup.object({
+    email: yup
+      .string("Enter your email")
+      .email("Enter a valid email")
+      .required("Email is required"),
+    password: yup
+      .string("Enter your password")
+      .min(8, "Password should be of minimum 8 characters length")
+      .required("Password is required"),
+  });
+
+  const LoginForm = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      // JUST FOR NOW
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
   return (
     <Box
       sx={{
@@ -30,27 +48,35 @@ function Login() {
             Login
           </Typography>
           <TextField
+            name="email"
             label="Email"
             fullWidth
             variant="outlined"
             required
             autoFocus
-            // error={emailError}
-            // helperText={emailError ? "Email is required" : ""}
-            // value={email}
-            // onChange={(e) => setEmail(e.target.value)}
+            size="small"
+            value={LoginForm.values.email}
+            onChange={LoginForm.handleChange}
+            onBlur={LoginForm.handleBlur}
+            error={LoginForm.touched.email && Boolean(LoginForm.errors.email)}
+            helperText={LoginForm.touched.email && LoginForm.errors.email}
           />
           <TextField
+            name="password"
             label="Password"
             fullWidth
             variant="outlined"
             required
-            // error={passwordError}
-            // helperText={passwordError ? "Password is required" : ""}
-            // value={password}
-            // onChange={(e) => setPassword(e.target.value)}
+            size="small"
+            value={LoginForm.values.password}
+            onChange={LoginForm.handleChange}
+            onBlur={LoginForm.handleBlur}
+            error={
+              LoginForm.touched.password && Boolean(LoginForm.errors.password)
+            }
+            helperText={LoginForm.touched.password && LoginForm.errors.password}
           />
-          <Button variant="contained" size="large">
+          <Button variant="contained" onClick={LoginForm.handleSubmit}>
             Login
           </Button>
           <Box
