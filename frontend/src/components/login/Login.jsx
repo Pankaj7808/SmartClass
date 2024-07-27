@@ -1,16 +1,15 @@
 import {
-  AppBar,
   Box,
   Button,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React,{useState} from "react";
 import * as yup from "yup";
 import { useFormik } from "formik";
 
-function Login() {
+function Login({ showLogin, setShowLogin }) {
   const validationSchema = yup.object({
     email: yup
       .string("Enter your email")
@@ -33,6 +32,7 @@ function Login() {
       alert(JSON.stringify(values, null, 2));
     },
   });
+
   return (
     <Box
       sx={{
@@ -72,7 +72,7 @@ function Login() {
             onChange={LoginForm.handleChange}
             onBlur={LoginForm.handleBlur}
             error={
-              LoginForm.touched.password && Boolean(LoginForm.errors.password)
+              LoginForm.touched.password && Boolean(LoginForm.errors.password) 
             }
             helperText={LoginForm.touched.password && LoginForm.errors.password}
           />
@@ -84,11 +84,18 @@ function Login() {
             flexDirection="row"
             justifyContent="space-between"
           >
-            <Typography variant="subtitle2" sx={{ cursor: "pointer" }}>
-              Don't have account?
+            <Typography
+              variant="subtitle2"
+              sx={{ cursor: "pointer" }}
+              onClick={() => setShowLogin(false)}
+            >
+              Don't have an account?
             </Typography>
-            <Typography variant="subtitle2" sx={{ cursor: "pointer" }}>
-              Forget Password?
+            <Typography
+              variant="subtitle2"
+              sx={{ cursor: "pointer" }}
+            >
+              Forgot Password?
             </Typography>
           </Box>
         </Box>
